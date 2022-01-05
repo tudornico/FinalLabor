@@ -12,11 +12,19 @@
           fx:controller="com.example.finallabor.StudentInterfaceController"
           prefHeight="400.0" prefWidth="600.0">
 
+
     <padding>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
     </padding>
 
-    <Button fx:id="Register" GridPane.columnIndex="1" GridPane.rowIndex="5" onAction="#registerToCourse"/>
 
-    <Button fx:id="AllStudents" GridPane.columnIndex="8" GridPane.rowIndex="5" onAction="#AllStudentsFromCourse"/>
+
+    <Button fx:id="CourseSubmit" text="Submit" GridPane.columnIndex="8" GridPane.rowIndex="1" onAction="#CourseSelected"/>
+
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="1" text="Select the Course ID"/>
+    <TextField fx:id="SelectedCourse" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
+    <Button fx:id="Register" text = "Register to a Course" GridPane.columnIndex="3" GridPane.rowIndex="5" onAction="#registerToCourse"/>
+
+    <Button fx:id="AllStudents" text= "All Students" GridPane.columnIndex="8" GridPane.rowIndex="5" onAction="#AllStudentsFromCourse"/>
 </GridPane>

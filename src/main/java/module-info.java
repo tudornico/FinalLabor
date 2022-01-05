@@ -9,8 +9,7 @@ module com.example.finallabor {
     requires javafx.graphics;
 
 
-    exports com.example.finallabor.UI;
-    opens com.example.finallabor.UI to javafx.fxml;
+
     exports com.example.finallabor;
     opens com.example.finallabor to javafx.fxml;
 

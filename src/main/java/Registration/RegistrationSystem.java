@@ -1,13 +1,8 @@
 package Registration;
 
-import Repo.CourseRepo;
-import Repo.StudentRepo;
-import Repo.TeacherRepo;
 import Uni.Course;
 import Uni.Student;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,21 +25,20 @@ public class RegistrationSystem {
      * method that registers a student to a course
      * @param course the couse that one student need to be added to
      * @param student the student that will be attending the course
-     * @return the true or false whether the student is enrolled or not
      */
-    public boolean register(Course course , Student student)  {
+    public void register(Course course , Student student)  {
         try (Connection con = DriverManager
                 .getConnection("jdbc:mysql://localhost:3306", "root", "Access0740188658")) {
                 String selectedDataBase="USE University";
 
             String alreadyregisterd="select * from StudentCourse "+
-                                    " where StudentId = " + student.getStudentId() + " and CourseId = "+course.getCourseId();
+                                    " where StudentId = " + "'"+student.getStudentId()+"'" + " and CourseId = "+"'"+course.getCourseId()+"'";
             Statement stm=null;
             stm=con.createStatement();
             stm.execute(selectedDataBase);
             ResultSet studentenrolled = stm.executeQuery(alreadyregisterd);
 
-            if(studentenrolled == null){
+            if(!studentenrolled.next()){
                 String register ="Insert  into StudentCourse (StudentId, CourseId) VALUES ("+ "'"+student.getStudentId()+"'" + ","
                         + "'"+course.getCourseId()+"'" + ")" ;
                 //add studentid and courseid in studentcourse
@@ -53,13 +47,11 @@ public class RegistrationSystem {
             }
             else
                 System.out.println("Student already registered");
-                return false;
 
         }
         catch (SQLException e){
             e.printStackTrace();
         }
-        return true;
     }
 
 

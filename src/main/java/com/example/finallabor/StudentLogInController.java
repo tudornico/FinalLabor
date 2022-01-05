@@ -20,8 +20,7 @@ public class StudentLogInController {
     public Button Login;
     @FXML
     public void LogInAsStudent() throws Exception {
-        //todo Parent window Student pass Student through parent
-        //todo pass parameter between 2 windows
+
 
         String FirstName=firstName.getText();
 
@@ -29,12 +28,12 @@ public class StudentLogInController {
         StudentRepo repo = new StudentRepo();
         Student student = repo.findStudent(FirstName,LastName);
 
-        StudentInterface studentInterface = new StudentInterface();
-
+        StudentInterface studentInterface =new StudentInterface();
+        StudentInterfaceController controller = StudentInterfaceController.Instance(student);
 
         Stage stage = new Stage();
         stage.setTitle("Student Interface");
-        System.out.println(repo.findStudent(FirstName,LastName));
+        //System.out.println(repo.findStudent(FirstName,LastName));
         studentInterface.start(stage);
     }
     }

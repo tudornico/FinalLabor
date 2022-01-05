@@ -12,7 +12,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException {
-        StudentRepo studentRepo = new StudentRepo();
+        StudentRepo studentRepo =new StudentRepo();
         CourseRepo courseRepo = new CourseRepo();
         TeacherRepo teacherRepo = new TeacherRepo();
         Student obj = new Student("FN","LN",0,30,null);

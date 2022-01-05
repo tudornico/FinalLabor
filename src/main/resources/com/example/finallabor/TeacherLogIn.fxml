@@ -9,7 +9,7 @@
 <?import javafx.geometry.Insets?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="com.example.finallabor.UI.TeacherLogInController"
+          fx:controller="com.example.finallabor.TeacherLogInController"
           prefHeight="200.0" prefWidth="400.0" vgap="8" hgap="10">
 
 
@@ -20,8 +20,8 @@
     <Label text="Enter First Name" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
     <TextField fx:id="firstName" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
 
-    <Label text="Enter Last Name" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <TextField fx:id="lastName" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+    <Label text="Enter Last Name" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <TextField fx:id="lastName" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
 
 
 

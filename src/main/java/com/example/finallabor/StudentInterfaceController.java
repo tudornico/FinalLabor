@@ -1,33 +1,61 @@
 package com.example.finallabor;
 
 import Registration.RegistrationSystem;
+import Repo.CourseRepo;
+import Repo.StudentRepo;
+import Sigletons.SingleCourse;
 import Uni.Course;
 import Uni.Student;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.sql.Statement;
+import java.util.List;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public class StudentInterfaceController {
+    @FXML
+    public Button CourseSubmit;
+    @FXML
+    public TextField SelectedCourse;
+    @FXML
+    public Button AllStudents;
+
     private Student student;
+    private Course course;
     private static StudentInterfaceController instance=null;
     public StudentInterfaceController() {}
 
-    public void setStudent(Student student) {
-        this.student = student;
+    private void setStudent(Student student) {
+        instance.student = student;
     }
     @FXML
     public Button Register;
 
-    @FXML
-    public Button AllStudents;
+
+
 
 
 
     public  static StudentInterfaceController Instance(Student student){
-        // todo always clear the instace if a new object is to be created
-        if(instance == null){
+        if(instance==null) {
             instance = new StudentInterfaceController();
-            instance.setStudent(student);
         }
+        instance.setStudent(student);
         return instance;
     }
 
@@ -40,13 +68,41 @@ public class StudentInterfaceController {
 
 
     @FXML
-    public void registerToCourse(){
+    public void registerToCourse() throws Exception {
         RegistrationSystem system = new RegistrationSystem();
-        system.register(null, instance.getStudent());
+
+        system.register(this.course,instance.student);
+
+
     }
 
     @FXML
-    public void AllStudentsFromCourse(){
+    public void AllStudentsFromCourse() throws Exception {
+        //the link works
+        StudentRepo repo = new StudentRepo();
+        List<Student> studentList = repo.StudentsToCourse(course);
+        for (Student student: studentList
+             ) {
 
+        }
+        Stage stage = new Stage();
+        stage.setTitle("Table Students");
+        TableStudentUI tableStudentUI = new TableStudentUI();
+        tableStudentUI.start(stage);
+        System.out.println(studentList);
+    }
+
+
+
+    public void CourseSelected(){
+
+        String courseID = SelectedCourse.getText();
+        CourseRepo repo = new CourseRepo();
+        try {
+            course = repo.findOne(Integer.parseInt(courseID));
+        }
+        catch (IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
 }

@@ -130,4 +130,26 @@ public class CourseRepo implements ICrudRepository<Course> {
             e.printStackTrace();
         }
     }
+
+    public Course findOne(int ID){
+
+        try (Connection con = DriverManager
+                .getConnection("jdbc:mysql://localhost:3306", "root", "Access0740188658")) {
+            Statement statement = null;
+            //getting all the values from Course
+            String Query = "Select * from University.Course where CourseId = " + "'"+ID+"'";
+            statement=con.createStatement();
+            ResultSet course= statement.executeQuery(Query);
+            if(!course.next()){
+                throw new IllegalArgumentException("Course non existent");
+            }
+            Course course1 = new Course(course.getString("Name"),null,course.getInt("MaxEnrollment"),ID,null);
+            course1.setCourseId(ID);
+            return course1;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

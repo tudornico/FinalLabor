@@ -13,8 +13,8 @@ import java.util.List;
 
 public class StudentRepo implements ICrudRepository<Student> {
 
-//todo turning this class into a singleton class
 
+public static StudentRepo instace;
     public StudentRepo() {
     }
 
@@ -131,13 +131,44 @@ public class StudentRepo implements ICrudRepository<Student> {
                 .getConnection("jdbc:mysql://localhost:3306", "root", "Access0740188658")) {
             Statement statement = null;
             //getting all the values from Student
-            String Query = "Select  * From Student where FirstName = " + firstName + " and LastName = "+lastName;
+            String Query = "Select * From University.Student where FirstName = " + "'"+firstName+ "'" + " and LastName = "+"'"+lastName+"'";
             statement = con.createStatement();
             ResultSet MyStudent = statement.executeQuery(Query);
             if(!MyStudent.next()){
                 throw new IllegalArgumentException("Wrong name");
             }
             return new Student(firstName,lastName,MyStudent.getInt("StudentId"),MyStudent.getInt("Credits"),null);
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Student> StudentsToCourse(Course course){
+        try (Connection con = DriverManager
+                .getConnection("jdbc:mysql://localhost:3306", "root", "Access0740188658")) {
+
+            String Query="Select * from University.Student" +
+                    " Inner Join University.StudentCourse " +
+                    " on StudentCourse.StudentId = Student.StudentId" +
+                    " Inner Join University.Course" +
+                    " on Course.CourseId = StudentCourse.CourseId" +
+                    " where Course.CourseId = " +course.getCourseId();
+            Statement stm;
+            stm = con.createStatement();
+            ResultSet students = stm.executeQuery(Query);
+            List<Student> studentsEnrolled = new ArrayList<>();
+            while(students.next()){
+                Student parsingStudent = new Student("",",",0,0,null);
+                parsingStudent.setStudentId(students.getInt("StudentId"));
+                parsingStudent.setLastname(students.getString("LastName"));
+                parsingStudent.setFirstname(students.getString("FirstName"));
+                parsingStudent.setTotalCredits(students.getInt("Credits"));
+                studentsEnrolled.add(parsingStudent);
+                parsingStudent=null;
+            }
+            return studentsEnrolled;
         }
         catch (SQLException e){
             e.printStackTrace();
