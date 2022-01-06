@@ -35,6 +35,10 @@ public class StudentInterfaceController {
     @FXML
     public Button AllStudents;
 
+    @FXML
+    public Button Credits;
+    public TextField CurrentCredits;
+
     private Student student;
     private Course course;
     private static StudentInterfaceController instance=null;
@@ -59,7 +63,17 @@ public class StudentInterfaceController {
         return instance;
     }
 
+    public void CourseSelected(){
 
+        String courseID = SelectedCourse.getText();
+        CourseRepo repo = new CourseRepo();
+        try {
+            instance.course = repo.findOne(Integer.parseInt(courseID));
+        }
+        catch (IllegalArgumentException e){
+            e.printStackTrace();
+        }
+    }
 
     public Student getStudent() {
         return student;
@@ -80,7 +94,7 @@ public class StudentInterfaceController {
     public void AllStudentsFromCourse() throws Exception {
         //the link works
         StudentRepo repo = new StudentRepo();
-        List<Student> studentList = repo.StudentsToCourse(course);
+        List<Student> studentList = repo.StudentsToCourse(instance.course);
         for (Student student: studentList
              ) {
 
@@ -93,16 +107,11 @@ public class StudentInterfaceController {
     }
 
 
+    public void ShowCredits(){
+        System.out.println(instance.getStudent().getTotalCredits());
+        CurrentCredits.setText("Total Credits : "+ instance.getStudent().getTotalCredits());
 
-    public void CourseSelected(){
-
-        String courseID = SelectedCourse.getText();
-        CourseRepo repo = new CourseRepo();
-        try {
-            instance.course = repo.findOne(Integer.parseInt(courseID));
-        }
-        catch (IllegalArgumentException e){
-            e.printStackTrace();
-        }
     }
+
+
 }

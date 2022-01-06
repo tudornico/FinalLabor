@@ -14,7 +14,7 @@ public class StudentInterface extends Application {
         FXMLLoader fxmlLoader =new FXMLLoader(
                 StudentInterface.class.getResource("StudentInterface.fxml")
         );
-        Scene scene  = new Scene(fxmlLoader.load(),600,500);
+        Scene scene  = new Scene(fxmlLoader.load(),800,400);
         primaryStage.setTitle("LogIn Student");
         primaryStage.setScene(scene);
         primaryStage.show();
