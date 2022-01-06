@@ -71,7 +71,7 @@ public class StudentInterfaceController {
     public void registerToCourse() throws Exception {
         RegistrationSystem system = new RegistrationSystem();
 
-        system.register(this.course,instance.student);
+        system.register(instance.course,instance.student);
 
 
     }
@@ -99,7 +99,7 @@ public class StudentInterfaceController {
         String courseID = SelectedCourse.getText();
         CourseRepo repo = new CourseRepo();
         try {
-            course = repo.findOne(Integer.parseInt(courseID));
+            instance.course = repo.findOne(Integer.parseInt(courseID));
         }
         catch (IllegalArgumentException e){
             e.printStackTrace();
