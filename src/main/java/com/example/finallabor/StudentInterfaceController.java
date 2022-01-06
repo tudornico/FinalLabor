@@ -97,13 +97,13 @@ public class StudentInterfaceController {
         List<Student> studentList = repo.StudentsToCourse(instance.course);
         for (Student student: studentList
              ) {
-
+                System.out.println(student);
         }
         Stage stage = new Stage();
         stage.setTitle("Table Students");
         TableStudentUI tableStudentUI = new TableStudentUI();
         tableStudentUI.start(stage);
-        System.out.println(studentList);
+        //System.out.println(studentList);
     }
 
 

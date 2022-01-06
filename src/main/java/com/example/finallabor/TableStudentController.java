@@ -3,6 +3,7 @@ package com.example.finallabor;
 import Uni.Student;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
@@ -20,6 +21,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 public class TableStudentController {
 
+    //public  ObservableList<Student> students =  FXCollections.observableArrayList();
     @FXML
     public TableView Students;
     @FXML
@@ -37,10 +39,6 @@ public class TableStudentController {
 
     public void ConstructorTable(List<Student> studentList){
 
-        for (Student student: studentList
-             ) {
-
-
-        }
+        Students.isVisible();
     }
 }

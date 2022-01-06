@@ -1,3 +1,4 @@
+
 module com.example.finallabor {
     requires javafx.controls;
     requires javafx.fxml;
@@ -7,7 +8,6 @@ module com.example.finallabor {
     requires java.datatransfer;
     requires java.desktop;
     requires javafx.graphics;
-
 
 
     exports com.example.finallabor;

@@ -15,7 +15,7 @@
     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
 </padding>
 
-    <TableView> fx:id="Students" GridPane.rowIndex="0" GridPane.columnIndex="1"
+    <TableView> fx:id="Students"
         <columns>
             <TableColumn text="FirstName"/>
             <TableColumn text="LastName"/>
